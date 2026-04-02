@@ -2,13 +2,15 @@ import java.util.Scanner;
 
 
 public class metodos {
-private Scanner K;
-private String [] jugadores;
-private String [][] tablero;
+private final Scanner K;
+private final String [] jugadores, simbolos;
+private final String [][] tablero;
 public metodos(){
     K=new Scanner(System.in);
     jugadores= new String[2];
+    simbolos= new String[2];
     tablero= new String[10][10];
+
 
 }
 public void Nuevo_totito(){
@@ -24,4 +26,59 @@ public void Nuevo_totito(){
         System.out.println();
     }
 }
+public void Ingresar_jugadores(){
+    for(int i=0;i<2;i++){
+        System.out.print("Ingrese el nombre del jugador  "+(i+1)+" :");
+        jugadores[i]=K.nextLine();
+        System.out.print("Ingrese el simbolo del jugador "+(i+1)+" :");
+        simbolos[i]=K.nextLine();
+    }
 }
+public void Ingresar_jugada() {
+    int fila, columna;
+    int turno = 0;
+    try {
+        while (true) {
+            int i = turno % 2;
+            System.out.println("Turno del jugador " + jugadores[i]);
+
+            while (true) {
+                System.out.print("Ingrese la fila donde desea colocar su simbolo: ");
+                fila = K.nextInt();
+
+                System.out.print("Ingrese la columna donde desea colocar su simbolo: ");
+                columna = K.nextInt();
+
+                // Validar límites
+                if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length) {
+                    System.out.println("Posición inválida. Intente de nuevo.");
+                    continue;
+                }
+
+                // Validar si está ocupado
+                if (!tablero[fila][columna].equals(" ")) {
+                    System.out.println("Esa casilla ya está ocupada. Intente otra.");
+                    continue;
+                }
+
+                // Jugada válida, colocar el símbolo
+                tablero[fila][columna] = simbolos[i];
+                break;
+            }
+
+            for (int r = 0; r < 10; r++) {
+                for (int c = 0; c < 10; c++) {
+                    System.out.print(tablero[r][c] + "_" + "│");
+                }
+                System.out.println();
+
+            }
+            turno++;
+        }
+        
+    } catch (Exception e) {
+        System.out.println("Entrada inválida. Intente de nuevo.");
+        K.nextLine();
+    }
+}
+    }
