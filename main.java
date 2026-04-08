@@ -1,4 +1,4 @@
-public class main {
+public class Main {
     public static void main(String[] args) {
         metodos m = new metodos();
         m.Nuevo_totito();
