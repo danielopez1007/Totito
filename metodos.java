@@ -81,7 +81,7 @@ public void Ingresar_jugada() {
         int contador =0;
                     for (int e =0;e<10;e++){
                     for(int j=0;j<10;j++){
-                        if(tablero[e][j].equals(simbolos[i])){
+                        if(tablero[e][j].equals(simbolos[i]) || tablero[j][e].equals(simbolos[i])){
                 contador++;
             }else{
                 contador=0;
@@ -93,6 +93,7 @@ public void Ingresar_jugada() {
             }
         }
     }
+        
         turno++;
 
             }
