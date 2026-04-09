@@ -40,7 +40,7 @@ public void Ingresar_jugadores(){
 }
 public void Ingresar_jugada() {
     int fila, columna;
-    int turno = 0;
+    int turno = 0, movimientos = 0;
     boolean ganador=false;
     try {
         while (ganador==false) {
@@ -71,36 +71,97 @@ public void Ingresar_jugada() {
                 break;
             }
 
-            for (int r = 0; r < 10; r++) {
-                for (int c = 0; c < 10; c++) {
-                    System.out.print(tablero[r][c] + "_" + "│");
+        for (int r = 0; r < 10; r++) {
+            for (int c = 0; c < 10; c++) {
+                System.out.print(tablero[r][c] + "_" + "│");
+            }
+            System.out.println();
+        }
+        
+        int contadorcol = 0;
+        int contadordiag1 = 0;
+        int contadordiag2 = 0;
+        int contadordiag3 = 0;
+        int contadordiag4 = 0;
+        int contador = 0;
+        for (int e = 0; e < 10; e++) {
+            for (int j = 0; j < 10; j++) {
+                if (tablero[e][j].equals(simbolos[i])) {
+                    contador++;
+                } else {
+                    contador = 0;
                 }
-                System.out.println();
-                
-        }
-        int contador =0;
-                    for (int e =0;e<10;e++){
-                    for(int j=0;j<10;j++){
-                        if(tablero[e][j].equals(simbolos[i]) || tablero[j][e].equals(simbolos[i])){
-                contador++;
-            }else{
-                contador=0;
-            }
-            if(contador==3){
-                System.out.println("El jugador "+jugadores[i]+" ha ganado");
-                ganador=true;
-                break;
-            }
-        }
-    }
-        
-        turno++;
+                if (tablero[j][e].equals(simbolos[i])) {
+                    contadorcol++;
+                }else{
+                    contadorcol=0;
+                }
 
+                if (contador == 3 || contadorcol == 3) {
+                    System.out.println("-------------------------------------------");
+                        System.out.println("| El jugador " + jugadores[i] + " ha ganado          |");
+                        System.out.println("-------------------------------------------");
+                    ganador = true;
+                    break;
+                }
             }
-            
-        
         }
-    catch (Exception e) {
+        for(int k=0;k<10;k++){
+            for(int l=0;l<10;l++){
+                int d = k+l;
+                if(d>=0 && d<10){
+                    if(tablero[d][l].equals(simbolos[i])){
+                        contadordiag1++;
+                    }else{
+                        contadordiag1=0;
+                    }
+                    if(tablero[l][d].equals(simbolos[i])){
+                        contadordiag2++;
+                    }else{
+                        contadordiag2=0;
+                    }
+                    if (contadordiag1 == 3 || contadordiag2 == 3) {
+                        System.out.println("-------------------------------------------");
+                        System.out.println("| El jugador " + jugadores[i] + " ha ganado          |");
+                        System.out.println("-------------------------------------------");
+                        ganador = true;
+                        break;
+                    }
+                    
+                }
+            }
+        }
+        for(int m=9;m>=0;m--){
+            for(int n =0;n<10;n++){
+                int d = m-n;
+                if(d>=0 && d<10){
+                    if(tablero[d][n].equals(simbolos[i])){
+                        contadordiag3++;
+                    }else{
+                        contadordiag3=0;
+                    }
+                    if(tablero[n][d].equals(simbolos[i])){
+                        contadordiag4++;
+                    }else{
+                        contadordiag4=0;
+                    }
+                    if (contadordiag3 == 3 || contadordiag4 == 3) {
+                        System.out.println("-------------------------------------------");
+                        System.out.println("| El jugador " + jugadores[i] + " ha ganado          |");
+                        System.out.println("-------------------------------------------");
+                        ganador = true;
+                        break;
+                    }
+                    
+                }
+            }
+        }
+        
+
+        turno++;
+        movimientos++;
+        }
+    } catch (Exception e) {
         System.out.println("Entrada inválida. Intente de nuevo.");
         K.nextLine();
     }
