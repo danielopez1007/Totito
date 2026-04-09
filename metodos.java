@@ -42,8 +42,9 @@ public void Ingresar_jugada() {
     int fila, columna;
     int turno = 0, movimientos = 0;
     boolean ganador=false;
-    try {
-        while (ganador==false) {
+    
+        while (ganador==false && movimientos<100) {
+            try {
             int i = turno % 2;
             System.out.println("Turno del jugador " + jugadores[i]);
 
@@ -97,7 +98,7 @@ public void Ingresar_jugada() {
                     contadorcol=0;
                 }
 
-                if (contador == 3 || contadorcol == 3) {
+                if (contador == 5 || contadorcol == 5) {
                     System.out.println("-------------------------------------------");
                         System.out.println("| El jugador " + jugadores[i] + " ha ganado          |");
                         System.out.println("-------------------------------------------");
@@ -120,7 +121,7 @@ public void Ingresar_jugada() {
                     }else{
                         contadordiag2=0;
                     }
-                    if (contadordiag1 == 3 || contadordiag2 == 3) {
+                    if (contadordiag1 == 5 || contadordiag2 == 5) {
                         System.out.println("-------------------------------------------");
                         System.out.println("| El jugador " + jugadores[i] + " ha ganado          |");
                         System.out.println("-------------------------------------------");
@@ -145,7 +146,7 @@ public void Ingresar_jugada() {
                     }else{
                         contadordiag4=0;
                     }
-                    if (contadordiag3 == 3 || contadordiag4 == 3) {
+                    if (contadordiag3 == 5 || contadordiag4 == 5) {
                         System.out.println("-------------------------------------------");
                         System.out.println("| El jugador " + jugadores[i] + " ha ganado          |");
                         System.out.println("-------------------------------------------");
@@ -160,9 +161,14 @@ public void Ingresar_jugada() {
 
         turno++;
         movimientos++;
+        if(movimientos==100){
+            System.out.println("-------------------------------------------");
+            System.out.println("| El juego ha terminado en empate                        |");
+            System.out.println("-------------------------------------------");
+            break;
         }
     } catch (Exception e) {
         System.out.println("Entrada inválida. Intente de nuevo.");
         K.nextLine();
     }
-}}
+}}}
