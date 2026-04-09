@@ -36,6 +36,7 @@ public void Ingresar_jugadores(){
         jugadores[i]=K.nextLine();
         System.out.print("Ingrese el simbolo del jugador "+(i+1)+" :");
         simbolos[i]=K.nextLine();
+        
     }
 }
 public void Ingresar_jugada() {
@@ -51,11 +52,12 @@ public void Ingresar_jugada() {
             while (true) {
                 System.out.print("Ingrese la fila donde desea colocar su simbolo: ");
                 fila = K.nextInt();
+                K.nextLine();
 
                 System.out.print("Ingrese la columna donde desea colocar su simbolo: ");
                 columna = K.nextInt();
+                K.nextLine();
 
-                
                 if (fila < 0 || fila >= tablero.length || columna < 0 || columna >= tablero[0].length) {
                     System.out.println("Posición inválida. Intente de nuevo.");
                     continue;
@@ -153,14 +155,14 @@ public void Ingresar_jugada() {
                         ganador = true;
                         break;
                     }
+                     
                     
                 }
             }
         }
-        
-
         turno++;
         movimientos++;
+
         if(movimientos==100){
             System.out.println("-------------------------------------------");
             System.out.println("| El juego ha terminado en empate                        |");
