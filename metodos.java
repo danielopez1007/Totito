@@ -1,10 +1,13 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class metodos {
 private final Scanner K;
-private final String [] jugadores, simbolos;
-private final String [][] tablero;
+private  String [] jugadores, simbolos;
+private  String [][] tablero;
 public metodos(){
     K=new Scanner(System.in);
     jugadores= new String[2];
@@ -12,6 +15,24 @@ public metodos(){
     tablero= new String[10][10];
 
 
+}
+public void guardar_partida() {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("partida_totito.txt"))) {
+        writer.write(jugadores[0] + "," + simbolos[0] + "," + jugadores[1] + "," + simbolos[1]);
+        writer.newLine();
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                String celda = tablero[i][j].equals(" ") ? "#" : tablero[i][j];
+                writer.write(celda);
+                if (!(i == 9 && j == 9)) {
+                    writer.write(",");
+                }
+            }
+        }
+    } catch (IOException e) {
+        System.out.println("Error al guardar: " + e.getMessage());
+    }
 }
 public void Nuevo_totito(){
     for(int i=0;i<10;i++){
@@ -160,6 +181,12 @@ public void Ingresar_jugada() {
                 }
             }
         }
+         System.out.print("Decea Guardar la partida? (s/n): ");
+               String Save= K.nextLine().toUpperCase();
+                if(Save.equals("S")){
+                     guardar_partida();
+                     System.out.println("Partida guardada exitosamente.");
+                }
         turno++;
         movimientos++;
 
