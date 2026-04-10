@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,6 +16,47 @@ public metodos(){
     tablero= new String[10][10];
 
 
+}
+public void cargar_partida() {
+    File archivo = new File("partida_totito.txt");
+    
+    // Verificamos si el archivo existe antes de intentar leerlo
+    if (!archivo.exists()) {
+        System.out.println("No hay ninguna partida guardada.");
+        return;
+    }
+
+    try (Scanner lector = new Scanner(archivo)) {
+        // 1. Cargar Nombres y Símbolos (Línea 1)
+        if (lector.hasNextLine()) {
+            String[] datosConfig = lector.nextLine().split(",");
+            jugadores[0] = datosConfig[0];
+            simbolos[0] = datosConfig[1];
+            jugadores[1] = datosConfig[2];
+            simbolos[1] = datosConfig[3];
+        }
+
+        // 2. Cargar Tablero (Línea 2)
+        if (lector.hasNextLine()) {
+            String[] datosTablero = lector.nextLine().split(",");
+            int contador = 0;
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    // Convertimos el caracter especial '#' de vuelta a espacio
+                    String celda = datosTablero[contador].equals("#") ? " " : datosTablero[contador];
+                    tablero[i][j] = celda;
+                    contador++;
+                }
+            }
+        }
+        System.out.println("Partida cargada exitosamente. ¡A jugar!");
+        
+        // 3. Continuar la partida
+        Ingresar_jugada();
+
+    } catch (IOException e) {
+        System.out.println("Error al cargar la partida: " + e.getMessage());
+    }
 }
 public void guardar_partida() {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("partida_totito.txt"))) {
