@@ -100,8 +100,8 @@ public void Ingresar_jugada() {
     int turno = 0, movimientos = 0;
     boolean ganador=false;
     
-        while (ganador==false && movimientos<100) {
-            try {
+    while (ganador==false && movimientos<100) {
+        try {
             int i = turno % 2;
             System.out.println("Turno del jugador " + jugadores[i]);
 
@@ -221,6 +221,8 @@ public void Ingresar_jugada() {
                 if(Save.equals("S")){
                      guardar_partida();
                      System.out.println("Partida guardada exitosamente.");
+                     ganador=true;
+                     break;
                 }
         turno++;
         movimientos++;
