@@ -123,9 +123,15 @@ public void Ingresar_jugada() {
             System.out.println("Turno del jugador " + jugadores[i]);
 
             while (true) {
-                System.out.print("Ingrese la fila donde desea colocar su simbolo: ");
+                System.out.print("Ingrese la fila donde desea colocar su simbolo o -1 para guardar: ");
                 fila = K.nextInt();
                 K.nextLine();
+                if(fila ==-1){
+                     guardar_partida();
+                     System.out.println("Partida guardada exitosamente.");
+                     ganador=true;
+                     break;
+                }
 
                 System.out.print("Ingrese la columna donde desea colocar su simbolo: ");
                 columna = K.nextInt();
@@ -235,14 +241,8 @@ public void Ingresar_jugada() {
         }
         turno++;
         movimientos++;
-         System.out.print("Decea Guardar la partida? (s/n): ");
-               String Save= K.nextLine().toUpperCase();
-                if(Save.equals("S")){
-                     guardar_partida();
-                     System.out.println("Partida guardada exitosamente.");
-                     ganador=true;
-                     break;
-                }
+         
+                
        
 
         if(movimientos==100){
