@@ -8,11 +8,15 @@ public class metodos {
 private final Scanner K;
 private  String [] jugadores, simbolos;
 private  String [][] tablero;
+private int turno;
+private int movimientos;
+
 public metodos(){
     K=new Scanner(System.in);
     jugadores= new String[2];
     simbolos= new String[2];
     tablero= new String[10][10];
+
 
 
 }
@@ -31,6 +35,12 @@ public void cargar_partida() {
             simbolos[0] = datosConfig[1];
             jugadores[1] = datosConfig[2];
             simbolos[1] = datosConfig[3];
+            this.turno = Integer.parseInt(datosConfig[4].trim());
+           
+           
+        
+            
+
         }
 
         if (lector.hasNextLine()) {
@@ -53,7 +63,7 @@ public void cargar_partida() {
 }
 public void guardar_partida() {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("partida_totito.txt"))) {
-        writer.write(jugadores[0] + "," + simbolos[0] + "," + jugadores[1] + "," + simbolos[1]);
+        writer.write(jugadores[0] + "," + simbolos[0] + "," + jugadores[1] + "," + simbolos[1]+"," + turno);
         writer.newLine();
 
         for (int i = 0; i < 10; i++) {
@@ -70,6 +80,9 @@ public void guardar_partida() {
     }
 }
 public void Nuevo_totito(){
+    this.turno=0;
+    this.movimientos=this.turno;
+   
     for(int i=0;i<10;i++){
         for(int j=0;j<10;j++){
             tablero[i][j]=" ";
@@ -79,8 +92,10 @@ public void Nuevo_totito(){
         for (int j = 0; j < 10; j++) {
             System.out.print(tablero[i][j] +"_"+ "│");
         }
+       
         System.out.println();
     }
+     System.out.println("Pablo Daniel Ordoñez Lopez/carnet: 7690-25-14738");
 }
 
     
@@ -97,8 +112,10 @@ public void Ingresar_jugadores(){
 }
 public void Ingresar_jugada() {
     int fila, columna;
-    int turno = 0, movimientos = 0;
+   
     boolean ganador=false;
+     
+     
     
     while (ganador==false && movimientos<100) {
         try {
@@ -216,6 +233,8 @@ public void Ingresar_jugada() {
                 }
             }
         }
+        turno++;
+        movimientos++;
          System.out.print("Decea Guardar la partida? (s/n): ");
                String Save= K.nextLine().toUpperCase();
                 if(Save.equals("S")){
@@ -224,8 +243,7 @@ public void Ingresar_jugada() {
                      ganador=true;
                      break;
                 }
-        turno++;
-        movimientos++;
+       
 
         if(movimientos==100){
             System.out.println("-------------------------------------------");

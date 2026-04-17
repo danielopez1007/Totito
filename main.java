@@ -3,7 +3,7 @@ public class main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
       System.out.println("------------------------------");
-         System.out.println("Bienvenido al juego del Totito |");
+         System.out.println("Bienvenido al juego del Totito |"+"\n"+"Pablo Daniel Ordoñez lopez/7690-25-14738");
          System.out.println("------------------------------");
         boolean salir = false;
         while (!salir) {
