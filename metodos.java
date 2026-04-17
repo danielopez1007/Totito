@@ -46,16 +46,25 @@ public void cargar_partida() {
         if (lector.hasNextLine()) {
             String[] datosTablero = lector.nextLine().split(",");
             int contador = 0;
+            System.out.println();
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     String celda = datosTablero[contador].equals("#") ? " " : datosTablero[contador];
                     tablero[i][j] = celda;
                     contador++;
+                    
+                    System.out.print(tablero[i][j] + "_" + "│");
+                    
                 }
+                System.out.println();
             }
         }
+        System.out.println();
         System.out.println("Partida cargada exitosamente.");
-        Ingresar_jugada();
+        
+    
+            System.out.println();
+            Ingresar_jugada();
 
     } catch (IOException e) {
         System.out.println("Error al cargar: " + e.getMessage());
@@ -159,6 +168,12 @@ public void Ingresar_jugada() {
             }
             System.out.println();
         }
+        if(fila ==-1){
+                     guardar_partida();
+                     System.out.println("Partida guardada exitosamente.");
+                     ganador=true;
+                     break;
+                    }
         
         int contadorcol = 0;
         int contadordiag1 = 0;
