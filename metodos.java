@@ -47,7 +47,9 @@ public void cargar_partida() {
             String[] datosTablero = lector.nextLine().split(",");
             int contador = 0;
             System.out.println();
+            System.out.println("  0  1  2  3  4  5  6  7  8  9");
             for (int i = 0; i < 10; i++) {
+                System.out.print(i + "│");
                 for (int j = 0; j < 10; j++) {
                     String celda = datosTablero[contador].equals("#") ? " " : datosTablero[contador];
                     tablero[i][j] = celda;
@@ -74,8 +76,9 @@ public void guardar_partida() {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("partida_totito.txt"))) {
         writer.write(jugadores[0] + "," + simbolos[0] + "," + jugadores[1] + "," + simbolos[1]+"," + turno);
         writer.newLine();
-
+       
         for (int i = 0; i < 10; i++) {
+        
             for (int j = 0; j < 10; j++) {
                 String celda = tablero[i][j].equals(" ") ? "#" : tablero[i][j];
                 writer.write(celda);
@@ -97,8 +100,11 @@ public void Nuevo_totito(){
             tablero[i][j]=" ";
         }
     }
+    System.out.println("  0  1  2  3  4  5  6  7  8  9");
     for (int i = 0; i < 10; i++) {
+        System.out.print(i + "│");
         for (int j = 0; j < 10; j++) {
+           
             System.out.print(tablero[i][j] +"_"+ "│");
         }
        
@@ -161,9 +167,11 @@ public void Ingresar_jugada() {
                 tablero[fila][columna] = simbolos[i];
                 break;
             }
-
+             System.out.println("  0  1  2  3  4  5  6  7  8  9");
         for (int r = 0; r < 10; r++) {
+              System.out.print(r + "│");
             for (int c = 0; c < 10; c++) {
+                
                 System.out.print(tablero[r][c] + "_" + "│");
             }
             System.out.println();
